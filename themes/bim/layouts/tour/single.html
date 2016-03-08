@@ -30,6 +30,27 @@
 <!-- ******FEATURES****** -->
 <section id="features" class="features section">
     <div class="container">
+
+
+        {{ range $.Site.Data.tour.features }}
+
+          <div class="item row">
+            <div class="content col-md-5 col-sm-5 col-xs-12 pull-right col-md-offset-1 col-sm-offset-1 col-xs-offset-0 from-right">
+                <h3 class="title">{{ .title }}</h3>
+                <div class="details">
+                    <p>{{ .details | markdownify }}</p>
+                </div>
+            </div><!--//content-->
+            <div class="figure col-md-6 col-sm-6 col-xs-12 from-left">
+                <img class="img-responsive" src="/img/tour/features/{{ .image }}" alt="" />
+            </div><!--//figure-->
+          </div><!--//item-->
+
+          <hr />
+
+        {{ end }}
+
+
         <div class="item row">
             <div class="content col-md-5 col-sm-5 col-xs-12 pull-right col-md-offset-1 col-sm-offset-1 col-xs-offset-0 from-right">
                 <h3 class="title">Feature one consectetur neque</h3>

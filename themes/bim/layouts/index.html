@@ -68,143 +68,83 @@
 <!-- ******WHY****** -->
 <section id="why" class="why section">
     <div class="container">
-        <h2 class="title text-center">Why Use Tempo</h2>
-        <p class="intro text-center">More than 300,000 happy customers are using Tempo around the world</p>
-        {{ range .Data.Pages }}
+        <p class="intro text-center">
+          {{ range .Data.Pages }}
             {{if eq .Type "index" }} 
                 {{.Content}}
             {{end}}
-        {{ end }}
+          {{ end }}
+        </p>
         <div class="row">
             <div class="benefits col-md-7 col-sm-6 col-xs-12">
 
+                {{ range $.Site.Data.benefits }}
                 <div class="item clearfix">
                     <div class="icon col-md-3 col-xs-12 text-center">
-                        <span class="pe-icon pe-7s-rocket"></span>
+                        <span class="pe-icon {{ .icon }}"></span>
                     </div><!--//icon-->
                     <div class="content col-md-9 col-xs-12">
-                        <h3 class="title">Brings you consectetuer adipiscing elit</h3>
-                        <p class="desc">State a benefit of your product/services here. You can change the icon on the left to any of the 500+ <a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">FontAwesome icons</a> available. Maecenas ultrices pellentesque nisi, eu volutpat nunc. </p>
+                        <h3 class="title">{{ .title }}</h3>
+                        <p class="desc">{{ .description }}</p>
                     </div><!--//content-->
                 </div><!--//item-->
-                <div class="item clearfix">
-                    <div class="icon col-md-3  col-xs-12 text-center">
-                        <span class="pe-icon pe-7s-piggy"></span>
-                    </div><!--//icon-->
-                    <div class="content col-md-9 col-xs-12">
-                        <h3 class="title">No more velit tristique condimentum</h3>
-                        <p class="desc">State a benefit of your product/services here. You can change the icon on the left to any of the 500+ <a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">FontAwesome icons</a> available. Maecenas ultrices pellentesque nisi, eu volutpat nunc. </p>
-                    </div><!--//content-->
-                </div><!--//item-->
-                <div class="item clearfix">
-                    <div class="icon col-md-3  col-xs-12 text-center">
-                        <span class="pe-icon pe-7s-users"></span>
-                    </div><!--//icon-->
-                    <div class="content col-md-9 col-xs-12">
-                        <h3 class="title">Connect lectus ultricies dolor vulputate</h3>
-                        <p class="desc">State a benefit of your product/services here. You can change the icon on the left to any of the 500+ <a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">FontAwesome icons</a> available. Maecenas ultrices pellentesque nisi, eu volutpat nunc. </p>
-                    </div><!--//content-->
-                </div><!--//item-->
-                <div class="item clearfix">
-                    <div class="icon col-md-3  col-xs-12 text-center">
-                        <span class="pe-icon pe-7s-bicycle"></span>
-                    </div><!--//icon-->
-                    <div class="content col-md-9 col-xs-12">
-                        <h3 class="title">Liberate vulputate eleifend tellus</h3>
-                        <p class="desc">State a benefit of your product/services here. You can change the icon on the left to any of the 500+ <a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">FontAwesome icons</a> available. Maecenas ultrices pellentesque nisi, eu volutpat nunc. Cras pharetra turpis pharetra iaculis euismod.</p>
-                    </div><!--//content-->
-                </div><!--//item-->
-                <div class="item last clearfix">
-                    <div class="icon col-md-3  col-xs-12 text-center">
-                        <span class="pe-icon pe-7s-joy"></span>
-                    </div><!--//icon-->
-                    <div class="content col-md-9 col-xs-12">
-                        <h3 class="title">Helps laoreet auctor libero</h3>
-                        <p class="desc">State a benefit of your product/services here. You can change the icon on the left to any of the 500+ <a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">FontAwesome icons</a> available. Maecenas ultrices pellentesque nisi, eu volutpat nunc. Pellentesque fermentum purus nec mi vulputate interdum. Ut eu vulputate mi, nec imperdiet enim. Ut faucibus faucibus turpis et luctus. Quisque bibendum tristique purus eu pulvinar. Cras pharetra turpis pharetra iaculis euismod. Nullam ac ullamcorper turpis, quis tristique dui.</p>
-                    </div><!--//content-->
-                </div><!--//item-->
-                <div class="clearfix"></div>
-                <div class="text-center">
-                    <a class="btn btn-cta btn-cta-secondary" href="tour.html" >Learn how it works</a>
-                </div>
+                {{ end }}
             </div>
             <div class="testimonials col-md-4 col-sm-5 col-md-offset-1 col-sm-offset-1 col-xs-12 col-xs-offset-0">
+                {{ range $.Site.Data.testimonials }}
                 <div class="item">
                     <div class="quote-box">
-                        <blockquote class="quote">Love it! vehicula consequat cursus. Morbi bibendum cursus urna, quis rhoncus arcu. Curabitur vel sollicitudin leo.
+                        <blockquote class="quote">
+                          {{ .quote }}
                         </blockquote><!--//quote-->
                         <p class="details">
-                            <span class="name">Steven Turner</span>
-                            <span class="title">Bristol, UK</span>
+                            <span class="name">{{ .name }}</span>
+                            <span class="title">{{ .title }}</span>
                         </p>
                         <i class="fa fa-quote-right"></i>
                     </div><!--//quote-box-->
                     <div class="people text-center">
-                        <img class="img-rounded user-pic" src="assets/images/people/people-1.png" alt="">
+                        <img class="img-rounded user-pic" src="{{ .image }}" alt="">
                     </div><!--//people-->
                 </div><!--//item-->
-                <div class="item">
-                    <div class="quote-box">
-                        <blockquote class="quote">Great vehicula consequat cursus. Pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim!
-
-                        </blockquote><!--//quote-->
-                        <p class="details">
-                            <span class="name">Michelle Cheung</span>
-                            <span class="title">San Francisco, US</span>
-                        </p>
-                        <i class="fa fa-quote-right"></i>
-                    </div><!--//quote-box-->
-                    <div class="people text-center">
-                        <img class="img-rounded user-pic" src="assets/images/people/people-2.png" alt="">
-                    </div><!--//people-->
-                </div><!--//item-->
-                <div class="item last">
-                    <div class="quote-box">
-                        <blockquote class="quote">Excellent Vivamus sit amet tortor id orci interdum tempor sed sit amet ante, pretium quis, sem. Nulla consequat massa quis enim!
-                        </blockquote><!--//quote-->
-                        <p class="details">
-                            <span class="name">James Lee</span>
-                            <span class="title">London, UK</span>
-                        </p>
-                        <i class="fa fa-quote-right"></i>
-                    </div><!--//quote-box-->
-                    <div class="people text-center">
-                        <img class="img-rounded user-pic" src="assets/images/people/people-3.png" alt="">
-                    </div><!--//people-->
-                </div><!--//item-->
+                {{ end }}
             </div>
         </div><!--//row-->
     </div><!--//container-->
 </section><!--//why-->
 
 <!-- ******VIDEO****** -->
-<section id="video" class="video section">
-    <div class="container">
-        <h2 class="title">Grow your business, start today!</h2>
-        <p class="summary">If you have a promo video, you can put it in this block. Vitae dapibus elit viverra. Praesent ullamcorper dignissim arcu, at vulputate ligula suscipit eu.</p>
-        <div class="control text-center">
-            <button type="button" id="play-trigger" class="play-trigger" data-toggle="modal" data-target="#tour-video"><i class="fa fa-play"></i></button>
-            <p>Watch Video</p>
+{{ range $k, $v := $.Site.Data.videos }}
+  {{if eq $k "frontpage" }} 
+  <section id="video" class="video section">
+      <div class="container">
+          <h2 class="title">{{ $v.title }}</h2>
+          <p class="summary">{{ $v.summary }}</p>
+          <div class="control text-center">
+              <button type="button" id="play-trigger" class="play-trigger" data-toggle="modal" data-target="#tour-video"><i class="fa fa-play"></i></button>
+              <p>{{ $v.button }}</p>
 
-            <!-- Video Modal -->
-            <div class="modal modal-video" id="tour-video" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 id="videoModalLabel" class="modal-title">Video Tour</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="video-container">
-                                <iframe id="vimeo-video" src="//player.vimeo.com/video/32424882?color=ffffff&amp;wmode=transparent" width="720" height="405" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                            </div><!--//video-container-->
-                        </div><!--//modal-body-->
-                    </div><!--//modal-content-->
-                </div><!--//modal-dialog-->
-            </div><!--//modal-->
-        </div><!--//control-->
-    </div>
-</section><!--//video-->
+              <!-- Video Modal -->
+              <div class="modal modal-video" id="tour-video" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                              <h4 id="videoModalLabel" class="modal-title">Video Tour</h4>
+                          </div>
+                          <div class="modal-body">
+                              <div class="video-container">
+                                  <iframe id="vimeo-video" src="{{ $v.vimeourl }}?color=ffffff&amp;wmode=transparent" width="720" height="405" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                              </div><!--//video-container-->
+                          </div><!--//modal-body-->
+                      </div><!--//modal-content-->
+                  </div><!--//modal-dialog-->
+              </div><!--//modal-->
+          </div><!--//control-->
+      </div>
+  </section><!--//video-->
+  {{ end }}
+{{ end }}
 
 <!-- ******FAQ****** -->
 <section id="faq" class="faq section has-bg-color">

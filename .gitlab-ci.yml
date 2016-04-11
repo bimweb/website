@@ -1,0 +1,10 @@
+image: jonathanbp/docker-alpine-hugo:latest
+
+pages:
+  script:
+    - hugo --theme=bim
+  artifacts:
+    paths:
+      - public
+  only:
+    - master

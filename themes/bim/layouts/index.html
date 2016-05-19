@@ -5,7 +5,7 @@
     <div class="container intro">
         <h2 class="title">BIMWEB vil forandre vores måde at bygge på</h2>
         <p class="summary">BIMWEB er den nye kommunikationsplatform, som understøtter alt samarbejde mellem byggeriets parter i en let og overskuelig form</p>
-        <a class="btn btn-cta btn-cta-secondary" href="/tour/">Læs mere</a>
+        <!--<a class="btn btn-cta btn-cta-secondary" href="/tour/">Læs mere</a>-->
     </div><!--//intro-->
 
     <div class="fixed-container">
@@ -13,30 +13,24 @@
             <div class="container text-center">
                 <h3 class="title">Prøv {{ .Site.Title }} Gratis</h3>
                 <p class="summary">Kontakt os for at prøve {{ .Site.Title }} gratis på dit eget projekt.</p>
-                <form class="signup-form">
+                <form class="signup-form" method="post" action="https://formspree.io/info@bimweb.dk">
                     <div class="form-group">
                         <label class="sr-only" for="semail1">Din email</label>
-                        <input type="email" id="semail1" name="semail1" class="form-control" placeholder="Skriv din email adresse">
+                        <input type="email" id="_replyto" name="_replyto" class="form-control" placeholder="Skriv din email adresse">
                     </div>
                     <button type="submit" class="btn btn-cta btn-cta-primary">JA TAK</button>
                 </form><!--//signup-form-->
             </div><!--//contianer-->
         </div><!--//signup-->
-        <div class="social text-center">
+        <!--<div class="social text-center">
             <div class="container">
                 <span class="line">Love {{ .Site.Title }}? Spread the word:</span>
-
-                <!--//twitter tweet button code starts -->
                 <div class="twitter-tweet">
                     <a href="https://twitter.com/share" class="twitter-share-button" data-via="bimweb" data-hashtags="bim #cool #projektweb">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
                 </div>
-                <!--//twitter tweet button code ends -->
-
-                <!--//facebook like button code starts-->
                 <div class="fb-like" data-href="http://bimweb.eu" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true" ></div>
-                <!--//facebook like button code ends-->
             </div>
-        </div><!--//social-->
+        </div>--><!--//social-->
     </div>
     <div class="bg-slider-wrapper">
         <div id="bg-slider" class="flexslider bg-slider">
@@ -70,7 +64,7 @@
     <div class="container">
         <p class="intro text-center">
           {{ range .Data.Pages }}
-            {{if eq .Type "index" }} 
+            {{if eq .Type "index" }}
                 {{.Content}}
             {{end}}
           {{ end }}
@@ -78,44 +72,45 @@
         <div class="row">
             <div class="benefits col-md-7 col-sm-6 col-xs-12">
 
-                {{ range $.Site.Data.benefits }}
+                {{ range $index, $element := .Site.Taxonomies.featured_on.frontpage }}
                 <div class="item clearfix">
                     <div class="icon col-md-3 col-xs-12 text-center">
-                        <span class="pe-icon {{ .icon }}"></span>
+                        <span class="pe-icon {{ $element.Page.Params.icon }}"></span>
                     </div><!--//icon-->
                     <div class="content col-md-9 col-xs-12">
-                        <h3 class="title">{{ .title }}</h3>
-                        <p class="desc">{{ .description }}</p>
+                        <h3 class="title">{{ $element.Page.Title }}</h3>
+                        <p class="desc">{{ $element.Page.Summary }}</p>
                     </div><!--//content-->
                 </div><!--//item-->
                 {{ end }}
             </div>
-            <div class="testimonials col-md-4 col-sm-5 col-md-offset-1 col-sm-offset-1 col-xs-12 col-xs-offset-0">
+
+            <!--<div class="testimonials col-md-4 col-sm-5 col-md-offset-1 col-sm-offset-1 col-xs-12 col-xs-offset-0">
                 {{ range $.Site.Data.testimonials }}
                 <div class="item">
                     <div class="quote-box">
                         <blockquote class="quote">
                           {{ .quote }}
-                        </blockquote><!--//quote-->
+                        </blockquote><
                         <p class="details">
                             <span class="name">{{ .name }}</span>
                             <span class="title">{{ .title }}</span>
                         </p>
                         <i class="fa fa-quote-right"></i>
-                    </div><!--//quote-box-->
+                    </div><
                     <div class="people text-center">
                         <img class="img-rounded user-pic" src="{{ .image }}" alt="">
-                    </div><!--//people-->
-                </div><!--//item-->
+                    </div>
+                </div>
                 {{ end }}
-            </div>
-        </div><!--//row-->
-    </div><!--//container-->
+            </div>-->
+        </div>
+    </div>
 </section><!--//why-->
 
 <!-- ******VIDEO****** -->
-{{ range $k, $v := $.Site.Data.videos }}
-  {{if eq $k "frontpage" }} 
+<!--{{ range $k, $v := $.Site.Data.videos }}
+  {{if eq $k "frontpage" }}
   <section id="video" class="video section">
       <div class="container">
           <h2 class="title">{{ $v.title }}</h2>
@@ -124,7 +119,6 @@
               <button type="button" id="play-trigger" class="play-trigger" data-toggle="modal" data-target="#tour-video"><i class="fa fa-play"></i></button>
               <p>{{ $v.button }}</p>
 
-              <!-- Video Modal -->
               <div class="modal modal-video" id="tour-video" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel" aria-hidden="true">
                   <div class="modal-dialog">
                       <div class="modal-content">
@@ -135,225 +129,90 @@
                           <div class="modal-body">
                               <div class="video-container">
                                   <iframe id="vimeo-video" src="{{ $v.vimeourl }}?color=ffffff&amp;wmode=transparent" width="720" height="405" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                              </div><!--//video-container-->
-                          </div><!--//modal-body-->
-                      </div><!--//modal-content-->
-                  </div><!--//modal-dialog-->
-              </div><!--//modal-->
-          </div><!--//control-->
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
       </div>
-  </section><!--//video-->
+  </section>
   {{ end }}
-{{ end }}
+{{ end }}-->
 
 <!-- ******FAQ****** -->
 <section id="faq" class="faq section has-bg-color">
     <div class="container">
-        <h2 class="title text-center">Frequently Asked Questions</h2>
+        <h2 class="title text-center">Oftest stillede spørgsmål</h2>
         <div class="row">
             <div class="col-md-6 col-sm-6 col-xs-12">
+                
+                {{ range $key, $element := first 3 $.Site.Taxonomies.featured_on.faq }}
+
                 <div class="panel">
                     <div class="panel-heading">
-                        <h4 class="panel-title"><a data-parent="#accordion"
-                        data-toggle="collapse" class="panel-toggle" href="#faq1"><i class="fa fa-plus-square"></i>Can I viverra sit amet quam eget lacinia?</a></h4>
+                        <h4 class="panel-title">
+                          <a data-parent="#accordion"
+                        data-toggle="collapse" class="panel-toggle" href="#faq-{{$key}}">
+                            <i class="fa fa-plus-square"></i>
+                            {{ $element.Page.Params.question }}
+                          </a>
+                        </h4>
                     </div>
 
-                    <div class="panel-collapse collapse" id="faq1">
+                    <div class="panel-collapse collapse" id="faq-{{$key}}">
                         <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life
-                            accusamus terry richardson ad squid. 3 wolf moon officia
-                            aute, non cupidatat skateboard dolor brunch. Food truck
-                            quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-                            sunt aliqua put a bird on it squid single-origin coffee
-                            nulla assumenda shoreditch et. Nihil anim keffiyeh
-                            helvetica, craft beer labore wes anderson cred nesciunt
-                            sapiente ea proident. Ad vegan excepteur butcher vice lomo.
-                            Leggings occaecat craft beer farm-to-table, raw denim
-                            aesthetic synth nesciunt you probably haven't heard of them
-                            accusamus labore sustainable VHS.
+                            {{ $element.Page.Summary }}
                         </div>
                     </div>
                 </div><!--//panel-->
 
-                <div class="panel">
-                    <div class="panel-heading">
-                        <h4 class="panel-title"><a data-parent="#accordion"
-                        data-toggle="collapse" class="panel-toggle" href="#faq2"><i class="fa fa-plus-square"></i>What is the ipsum dolor sit amet quam tortor?</a></h4>
-                    </div>
+                {{ end }}
 
-                    <div class="panel-collapse collapse" id="faq2">
-                        <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life
-                            accusamus terry richardson ad squid. 3 wolf moon officia
-                            aute, non cupidatat skateboard dolor brunch. Food truck
-                            quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-                            sunt aliqua put a bird on it squid single-origin coffee
-                            nulla assumenda shoreditch et. Nihil anim keffiyeh
-                            helvetica, craft beer labore wes anderson cred nesciunt
-                            sapiente ea proident. Ad vegan excepteur butcher vice lomo.
-                            Leggings occaecat craft beer farm-to-table, raw denim
-                            aesthetic synth nesciunt you probably haven't heard of them
-                            accusamus labore sustainable VHS.
-                        </div>
-                    </div>
-                </div><!--//panel-->
-
-                <div class="panel">
-                    <div class="panel-heading">
-                        <h4 class="panel-title"><a data-parent="#accordion"
-                        data-toggle="collapse" class="panel-toggle" href="#faq3"><i class="fa fa-plus-square"></i>How does the morbi quam tortor work?</a></h4>
-                    </div>
-
-                    <div class="panel-collapse collapse" id="faq3">
-                        <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life
-                            accusamus terry richardson ad squid. 3 wolf moon officia
-                            aute, non cupidatat skateboard dolor brunch. Food truck
-                            quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-                            sunt aliqua put a bird on it squid single-origin coffee
-                            nulla assumenda shoreditch et. Nihil anim keffiyeh
-                            helvetica, craft beer labore wes anderson cred nesciunt
-                            sapiente ea proident. Ad vegan excepteur butcher vice lomo.
-                            Leggings occaecat craft beer farm-to-table, raw denim
-                            aesthetic synth nesciunt you probably haven't heard of them
-                            accusamus labore sustainable VHS.
-                        </div>
-                    </div>
-                </div><!--//panel-->
-
-                <div class="panel">
-                    <div class="panel-heading">
-                        <h4 class="panel-title"><a data-parent="#accordion"
-                        data-toggle="collapse" class="panel-toggle" href="#faq4"><i class="fa fa-plus-square"></i>Can I ipsum dolor sit amet nascetur ridiculus?</a></h4>
-                    </div>
-
-                    <div class="panel-collapse collapse" id="faq4">
-                        <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life
-                            accusamus terry richardson ad squid. 3 wolf moon officia
-                            aute, non cupidatat skateboard dolor brunch. Food truck
-                            quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-                            sunt aliqua put a bird on it squid single-origin coffee
-                            nulla assumenda shoreditch et. Nihil anim keffiyeh
-                            helvetica, craft beer labore wes anderson cred nesciunt
-                            sapiente ea proident. Ad vegan excepteur butcher vice lomo.
-                            Leggings occaecat craft beer farm-to-table, raw denim
-                            aesthetic synth nesciunt you probably haven't heard of them
-                            accusamus labore sustainable VHS.
-                        </div>
-                    </div>
-                </div><!--//panel-->
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12">
+
+                {{ range $key, $element := last 3 $.Site.Taxonomies.featured_on.faq }}
+
                 <div class="panel">
                     <div class="panel-heading">
-                        <h4 class="panel-title"><a data-parent="#accordion"
-                        data-toggle="collapse" class="panel-toggle" href="#faq5"><i class="fa fa-plus-square"></i>Is it possible to tellus eget auctor condimentum?</a></h4>
+                        <h4 class="panel-title">
+                          <a data-parent="#accordion"
+                        data-toggle="collapse" class="panel-toggle" href="#faq-{{add $key 3}}">
+                            <i class="fa fa-plus-square"></i>
+                            {{ $element.Page.Params.question }}
+                          </a>
+                        </h4>
                     </div>
 
-                    <div class="panel-collapse collapse" id="faq5">
+                    <div class="panel-collapse collapse" id="faq-{{add $key 3}}">
                         <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life
-                            accusamus terry richardson ad squid. 3 wolf moon officia
-                            aute, non cupidatat skateboard dolor brunch. Food truck
-                            quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-                            sunt aliqua put a bird on it squid single-origin coffee
-                            nulla assumenda shoreditch et. Nihil anim keffiyeh
-                            helvetica, craft beer labore wes anderson cred nesciunt
-                            sapiente ea proident. Ad vegan excepteur butcher vice lomo.
-                            Leggings occaecat craft beer farm-to-table, raw denim
-                            aesthetic synth nesciunt you probably haven't heard of them
-                            accusamus labore sustainable VHS.
+                            {{ $element.Page.Summary }}
                         </div>
                     </div>
                 </div><!--//panel-->
 
-                <div class="panel">
-                    <div class="panel-heading">
-                        <h4 class="panel-title"><a data-parent="#accordion"
-                        data-toggle="collapse" class="panel-toggle" href="#faq6"><i class="fa fa-plus-square"></i>Would it elementum turpis semper imperdiet?</a></h4>
-                    </div>
+                {{ end }}
 
-                    <div class="panel-collapse collapse" id="faq6">
-                        <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life
-                            accusamus terry richardson ad squid. 3 wolf moon officia
-                            aute, non cupidatat skateboard dolor brunch. Food truck
-                            quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-                            sunt aliqua put a bird on it squid single-origin coffee
-                            nulla assumenda shoreditch et. Nihil anim keffiyeh
-                            helvetica, craft beer labore wes anderson cred nesciunt
-                            sapiente ea proident. Ad vegan excepteur butcher vice lomo.
-                            Leggings occaecat craft beer farm-to-table, raw denim
-                            aesthetic synth nesciunt you probably haven't heard of them
-                            accusamus labore sustainable VHS.
-                        </div>
-                    </div>
-                </div><!--//panel-->
-
-                <div class="panel">
-                    <div class="panel-heading">
-                        <h4 class="panel-title"><a data-parent="#accordion"
-                        data-toggle="collapse" class="panel-toggle" href="#faq7"><i class="fa fa-plus-square"></i>How can I imperdiet lorem sem non nisl?</a></h4>
-                    </div>
-
-                    <div class="panel-collapse collapse" id="faq7">
-                        <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life
-                            accusamus terry richardson ad squid. 3 wolf moon officia
-                            aute, non cupidatat skateboard dolor brunch. Food truck
-                            quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-                            sunt aliqua put a bird on it squid single-origin coffee
-                            nulla assumenda shoreditch et. Nihil anim keffiyeh
-                            helvetica, craft beer labore wes anderson cred nesciunt
-                            sapiente ea proident. Ad vegan excepteur butcher vice lomo.
-                            Leggings occaecat craft beer farm-to-table, raw denim
-                            aesthetic synth nesciunt you probably haven't heard of them
-                            accusamus labore sustainable VHS.
-                        </div>
-                    </div>
-                </div><!--//panel-->
-
-                <div class="panel">
-                    <div class="panel-heading">
-                        <h4 class="panel-title"><a data-parent="#accordion"
-                        data-toggle="collapse" class="panel-toggle" href="#faq8"><i class="fa fa-plus-square"></i>Can I imperdiet massa ut?</a></h4>
-                    </div>
-
-                    <div class="panel-collapse collapse" id="faq8">
-                        <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life
-                            accusamus terry richardson ad squid. 3 wolf moon officia
-                            aute, non cupidatat skateboard dolor brunch. Food truck
-                            quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-                            sunt aliqua put a bird on it squid single-origin coffee
-                            nulla assumenda shoreditch et. Nihil anim keffiyeh
-                            helvetica, craft beer labore wes anderson cred nesciunt
-                            sapiente ea proident. Ad vegan excepteur butcher vice lomo.
-                            Leggings occaecat craft beer farm-to-table, raw denim
-                            aesthetic synth nesciunt you probably haven't heard of them
-                            accusamus labore sustainable VHS.
-                        </div>
-                    </div>
-                </div><!--//panel-->
             </div>
         </div><!--//row-->
-        <div class="more text-center">
+        <!--<div class="more text-center">
             <h4 class="title">More questions?</h4>
             <a class="btn btn-cta btn-cta-secondary" href="contact.html">Get in touch</a>
-        </div>
+        </div>-->
     </div><!--//container-->
 </section><!--//faq-->
 
 <!-- ******SIGNUP****** -->
 <section id="signup" class="signup">
     <div class="container text-center">
-        <h2 class="title">Klar til at kickstarte dit byggeprojekt med BIMWEB?</h2>
-        <p class="summary">Kontakt os for at prøve {{ .Site.Title }} gratis på dit eget projekt.</p>
-        <form class="signup-form" method="post" action="#">
+        <h2 class="title">Demo</h2>
+        <p class="summary">Vi vil meget gerne præsentere dig for BIMweb med en live-demo af systemet.
+Vi kan også hjælpe dig med et konkret projekt, hvis du har brug for sparring ift. mappestruktur, udbud, rettigheder eller andet.</p>
+        <form class="signup-form" method="post" action="https://formspree.io/info@bimweb.dk">
             <div class="form-group">
                 <label class="sr-only" for="semail2">Din email</label>
-                <input type="email" id="semail2" name="semail2" class="form-control" placeholder="Skriv din email adresse">
+                <input type="email" id="_replyto" name="_replyto" class="form-control" placeholder="Skriv din email adresse">
             </div>
             <button type="submit" class="btn btn-cta btn-cta-primary">Ja TAK</button>
         </form><!--//signup-form-->

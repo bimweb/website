@@ -1,3 +1,6 @@
 baseurl = "http://beta.bimweb.dk/"
 languageCode = "da-DK"
 title = "BIMWEB"
+
+[taxonomies]
+featured = "featured_on"
